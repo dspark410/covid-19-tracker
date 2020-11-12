@@ -24,14 +24,17 @@ body {
   margin-bottom: 20px;
 }
 
-/* .app_selectmenu select {
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 16px;
-  outline: none;
-} */
-
 .app_cardinfo {
   display: flex;
   justify-content: space-between;
+}
+
+/* .app_right {
+  padding: 10px;
+} */
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
 }

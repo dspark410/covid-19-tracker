@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'leaflet/dist/leaflet.css'
 import { Form, Card } from 'react-bootstrap'
 import InfoBox from './InfoBox'
 import Map from './Map'
+import TableData from './TableData'
+import LineGraph from './LineGraph'
 
 function App() {
   const [countries, setCountries] = useState([])
   const [worldInfo, setWorldInfo] = useState({})
   const [countryInfo, setCountryInfo] = useState({})
+  const [center, setCenter] = useState({ lat: 34.80746, lng: -40.4796 })
+  const [zoom, setZoom] = useState(3)
 
   useEffect(() => {
     const getCountries = async () => {
       const response = await fetch('https://disease.sh/v3/covid-19/countries')
       const data = await response.json()
+
       setCountries(data)
     }
     getCountries()
@@ -36,7 +42,7 @@ function App() {
 
     const response = await fetch(url)
     const data = await response.json()
-    console.log(data)
+
     setCountryInfo(data)
   }
 
@@ -88,12 +94,14 @@ function App() {
           ></InfoBox>
         </div>
 
-        <Map />
+        <Map center={center} zoom={zoom} />
       </div>
 
       <Card className='app_right'>
-        <Card.Text>Live Cases By Country</Card.Text>
-        <Card.Text>Worldwide New Cases</Card.Text>
+        <Card.Title className='p-3'>Live Cases By Country</Card.Title>
+        <TableData countries={countries} />
+        <Card.Title className='p-3'>Worldwide New Cases</Card.Title>
+        <LineGraph className='p-3' />
       </Card>
     </div>
   )
