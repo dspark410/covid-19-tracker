@@ -9,4 +9,26 @@
 
 .leaflet-container {
   height: 100%;
+  border-radius: 11px;
+}
+
+.popup-container {
+  width: 150px;
+}
+
+.flag {
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.flag img {
+  width: 100px;
+  border-radius: 5px;
+}
+
+.country {
+  font-size: 18px;
+  font-weight: bold;
 }

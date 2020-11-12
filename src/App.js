@@ -15,7 +15,9 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({})
   const [center, setCenter] = useState([32.80746, -40.4796])
   const [zoom, setZoom] = useState(3)
+  const [casesType, setCasesType] = useState('cases')
 
+  // Load country list on table
   useEffect(() => {
     const getCountries = async () => {
       const response = await fetch('https://disease.sh/v3/covid-19/countries')
@@ -26,6 +28,7 @@ function App() {
     getCountries()
   }, [])
 
+  //Load Worldwide stats on cards
   useEffect(() => {
     const getWorldWideInfo = async () => {
       const response = await fetch('https://disease.sh/v3/covid-19/all')
@@ -46,10 +49,13 @@ function App() {
 
     setCountryInfo(data)
 
-    setCenter([data.countryInfo.lat, data.countryInfo.long])
-
-    setZoom(4)
-    console.log(center, zoom)
+    if (e.target.value === 'worldwide') {
+      setCenter([32.80746, -40.4796])
+      setZoom(3)
+    } else {
+      setCenter([data.countryInfo.lat, data.countryInfo.long])
+      setZoom(4)
+    }
   }
 
   return (
@@ -68,7 +74,8 @@ function App() {
         </Form.Group>
         <div className='app_cardinfo'>
           <InfoBox
-            title='Cornavirus Cases'
+            onClick={(e) => setCasesType('cases')}
+            title='Coronavirus Cases'
             cases={
               countryInfo.todayCases
                 ? countryInfo.todayCases
@@ -77,6 +84,7 @@ function App() {
             total={countryInfo.cases ? countryInfo.cases : worldInfo.cases}
           ></InfoBox>
           <InfoBox
+            onClick={(e) => setCasesType('recovered')}
             title='Recovered'
             cases={
               countryInfo.todayRecovered
@@ -90,6 +98,7 @@ function App() {
             }
           ></InfoBox>
           <InfoBox
+            onClick={(e) => setCasesType('deaths')}
             title='Deaths'
             cases={
               countryInfo.todayDeaths
@@ -100,14 +109,20 @@ function App() {
           ></InfoBox>
         </div>
 
-        <Map center={center} zoom={zoom} />
+        <Map
+          countries={countries}
+          worldInfo={worldInfo}
+          center={center}
+          zoom={zoom}
+          casesType={casesType}
+        />
       </div>
 
       <Card className='app_right'>
         <Card.Title className='p-3'>Live Cases By Country</Card.Title>
         <TableData countries={countries} />
-        <Card.Title className='p-3'>Worldwide New Cases</Card.Title>
-        <LineGraph className='p-3' />
+        <Card.Title className='p-3'>Worldwide New {casesType}</Card.Title>
+        <LineGraph casesType={casesType} className='p-3' />
       </Card>
     </div>
   )

@@ -16,7 +16,7 @@ const options = {
     mode: 'index',
     intersect: false,
     callbacks: {
-      label: function (tooltipItem, data) {
+      label: function (tooltipItem) {
         return numeral(tooltipItem.value).format('+0,0')
       },
     },
@@ -44,23 +44,23 @@ const options = {
     ],
   },
 }
-const buildLineGraphData = (data, type) => {
+const buildLineGraphData = (data, casesType) => {
   const lineGraphData = []
   let dataPoint
   for (let date in data.cases) {
     if (dataPoint) {
       const newDataPoint = {
         x: date,
-        y: data[type][date] - dataPoint,
+        y: data[casesType][date] - dataPoint,
       }
       lineGraphData.push(newDataPoint)
     }
-    dataPoint = data[type][date]
+    dataPoint = data[casesType][date]
   }
   return lineGraphData
 }
 
-function LineGraph({ cases = 'cases' }) {
+function LineGraph({ casesType = 'cases' }) {
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -69,11 +69,11 @@ function LineGraph({ cases = 'cases' }) {
         'https://disease.sh/v3/covid-19/historical/all?lastdays=120'
       )
       const data = await response.json()
-      const lineData = buildLineGraphData(data, 'cases')
+      const lineData = buildLineGraphData(data, casesType)
       setData(lineData)
     }
     getData()
-  }, [cases])
+  }, [casesType])
 
   return (
     <div>
