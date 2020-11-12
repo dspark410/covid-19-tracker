@@ -1,0 +1,14 @@
+.infobox_container {
+  flex: 1;
+}
+
+.infobox_container:not(:last-child) {
+  margin-right: 10px;
+}
+
+.infobox {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}

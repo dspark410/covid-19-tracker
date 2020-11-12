@@ -1,12 +1,17 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-
+import numeral from 'numeral'
+import './infoBox.css'
 function InfoBox({ title, cases, total }) {
   return (
-    <Card>
-      <Card.Title>{title}</Card.Title>
-      <Card.Text>{cases}</Card.Text>
-      <Card.Text>{total} Total</Card.Text>
+    <Card className='infobox_container'>
+      <Card.Title className='infobox'>{title}</Card.Title>
+      <Card.Text className='infobox'>
+        +{numeral(cases).format('0.0a')}
+      </Card.Text>
+      <Card.Text className='infobox'>
+        {numeral(total).format('0.0a')} Total
+      </Card.Text>
     </Card>
   )
 }

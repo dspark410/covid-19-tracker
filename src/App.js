@@ -7,20 +7,21 @@ import InfoBox from './InfoBox'
 import Map from './Map'
 import TableData from './TableData'
 import LineGraph from './LineGraph'
+import { sort } from './utils'
 
 function App() {
   const [countries, setCountries] = useState([])
   const [worldInfo, setWorldInfo] = useState({})
   const [countryInfo, setCountryInfo] = useState({})
-  const [center, setCenter] = useState({ lat: 34.80746, lng: -40.4796 })
+  const [center, setCenter] = useState([32.80746, -40.4796])
   const [zoom, setZoom] = useState(3)
 
   useEffect(() => {
     const getCountries = async () => {
       const response = await fetch('https://disease.sh/v3/covid-19/countries')
       const data = await response.json()
-
-      setCountries(data)
+      const sortedData = sort(data)
+      setCountries(sortedData)
     }
     getCountries()
   }, [])
@@ -44,6 +45,11 @@ function App() {
     const data = await response.json()
 
     setCountryInfo(data)
+
+    setCenter([data.countryInfo.lat, data.countryInfo.long])
+
+    setZoom(4)
+    console.log(center, zoom)
   }
 
   return (
