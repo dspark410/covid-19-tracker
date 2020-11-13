@@ -60,7 +60,7 @@ const buildLineGraphData = (data, casesType) => {
   return lineGraphData
 }
 
-function LineGraph({ casesType = 'cases' }) {
+function LineGraph({ casesType, ...props }) {
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -76,21 +76,35 @@ function LineGraph({ casesType = 'cases' }) {
   }, [casesType])
 
   return (
-    <div>
-      {data && data.length > 0 && (
-        <Line
-          options={options}
-          data={{
-            datasets: [
-              {
-                data: data,
-                backgroundColor: 'rgba(204, 16, 52, 0.5)',
-                borderColor: '#CC1034',
-              },
-            ],
-          }}
-        />
-      )}
+    <div className={props.className}>
+      <div>
+        {data && data.length > 0 && (
+          <Line
+            options={options}
+            data={{
+              datasets: [
+                {
+                  data: data,
+                  backgroundColor: `${
+                    casesType === 'cases'
+                      ? 'rgb(227,149,161)'
+                      : casesType === 'recovered'
+                      ? 'rgb(195,229,152)'
+                      : 'rgb(247,186,168)'
+                  }`,
+                  borderColor: `${
+                    casesType === 'cases'
+                      ? '#cc1034'
+                      : casesType === 'recovered'
+                      ? '#7dd71d'
+                      : '#ff6c47'
+                  }`,
+                },
+              ],
+            }}
+          />
+        )}
+      </div>
     </div>
   )
 }

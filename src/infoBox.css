@@ -1,5 +1,7 @@
 .infobox_container {
   flex: 1;
+  cursor: pointer;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
 }
 
 .infobox_container:not(:last-child) {
@@ -11,4 +13,35 @@
   align-items: center;
   justify-content: center;
   padding: 10px 0;
+}
+
+.infobox-title {
+  font-size: 20px;
+}
+
+.infobox-text {
+  font-weight: bold;
+  font-size: 28px;
+}
+.border-red {
+  border: 1px #cc1034 solid;
+}
+
+.border-green {
+  border: 1px #7dd71d solid;
+}
+
+.border-orange {
+  border: 1px #ff6c47 solid;
+}
+.red {
+  color: #cc1034;
+}
+
+.green {
+  color: #7dd71d;
+}
+
+.orange {
+  color: #ff6c47;
 }

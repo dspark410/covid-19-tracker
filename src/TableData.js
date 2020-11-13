@@ -4,7 +4,7 @@ import numeral from 'numeral'
 
 function TableData({ countries }) {
   return (
-    <div className='table'>
+    <div className='table border-light'>
       <table>
         <tbody>
           {countries.map((country) => (

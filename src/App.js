@@ -7,7 +7,7 @@ import InfoBox from './InfoBox'
 import Map from './Map'
 import TableData from './TableData'
 import LineGraph from './LineGraph'
-import { sort } from './utils'
+import { sort, capitalize } from './utils'
 
 function App() {
   const [countries, setCountries] = useState([])
@@ -63,7 +63,11 @@ function App() {
       <div className='app_left'>
         <Form.Group className='app_selectmenu'>
           <h1>COVID-19 TRACKER</h1>
-          <Form.Control as='select' onChange={handleOnChange}>
+          <Form.Control
+            className='select-menu'
+            as='select'
+            onChange={handleOnChange}
+          >
             <option value='worldwide'>Worldwide</option>
             {countries.map((country) => (
               <option key={country.country} value={country.countryInfo.iso3}>
@@ -74,6 +78,8 @@ function App() {
         </Form.Group>
         <div className='app_cardinfo'>
           <InfoBox
+            red
+            active={casesType === 'cases'}
             onClick={(e) => setCasesType('cases')}
             title='Coronavirus Cases'
             cases={
@@ -84,6 +90,8 @@ function App() {
             total={countryInfo.cases ? countryInfo.cases : worldInfo.cases}
           ></InfoBox>
           <InfoBox
+            green
+            active={casesType === 'recovered'}
             onClick={(e) => setCasesType('recovered')}
             title='Recovered'
             cases={
@@ -98,6 +106,8 @@ function App() {
             }
           ></InfoBox>
           <InfoBox
+            orange
+            active={casesType === 'deaths'}
             onClick={(e) => setCasesType('deaths')}
             title='Deaths'
             cases={
@@ -118,12 +128,19 @@ function App() {
         />
       </div>
 
-      <Card className='app_right'>
-        <Card.Title className='p-3'>Live Cases By Country</Card.Title>
-        <TableData countries={countries} />
-        <Card.Title className='p-3'>Worldwide New {casesType}</Card.Title>
-        <LineGraph casesType={casesType} className='p-3' />
-      </Card>
+      <div className='app_right'>
+        <Card className='mb-3'>
+          <Card.Title className='p-3'>Live Cases By Country</Card.Title>
+          <TableData countries={countries} />
+        </Card>
+
+        <Card>
+          <Card.Title className='p-3'>
+            Worldwide New {capitalize(casesType)}
+          </Card.Title>
+          <LineGraph casesType={casesType} className='p-3 border-light graph' />
+        </Card>
+      </div>
     </div>
   )
 }

@@ -4,7 +4,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f6fa;
+  background-color: #f5f6fa !important;
 }
 
 .app {
@@ -14,7 +14,15 @@ body {
 }
 
 .app_left {
-  flex: 0.8;
+  flex: 0.9;
+}
+
+.select-menu {
+  outline: none !important;
+  box-shadow: none !important;
+  border: solid 1px #ccc !important;
+  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5) !important;
+  width: 20% !important;
 }
 
 .app_selectmenu {
@@ -27,14 +35,126 @@ body {
 .app_cardinfo {
   display: flex;
   justify-content: space-between;
+  overflow: auto;
 }
 
-/* .app_right {
-  padding: 10px;
-} */
+.app_right {
+  border-radius: 8px !important;
+}
 
-@media (max-width: 990px) {
+.chartjs-render-monitor {
+  height: 420px !important;
+}
+
+@media (max-width: 1400px) {
   .app {
     flex-direction: column;
+  }
+  .select-menu {
+    flex-direction: column !important;
+  }
+  .app_right {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .select-menu {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .app_cardinfo {
+    display: flex;
+    flex-direction: column;
+  }
+  .app_selectmenu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .infobox_container {
+    margin-bottom: 10px;
+    width: 350px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app_selectmenu h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .app_cardinfo {
+    display: flex;
+    flex-direction: column;
+  }
+  .app_selectmenu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .infobox_container {
+    margin-bottom: 10px;
+    width: 300px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+  }
+
+  .app_selectmenu h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 350px) {
+  .app_cardinfo {
+    display: flex;
+    flex-direction: column;
+  }
+  .app_selectmenu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .infobox_container {
+    margin-bottom: 10px;
+    width: 250px;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+  }
+
+  .app_selectmenu h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 300px) {
+  .app_cardinfo {
+    display: flex;
+    flex-direction: column;
+  }
+  .app_selectmenu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .infobox_container {
+    margin-bottom: 10px;
+    width: 220px;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+  }
+
+  .app_selectmenu h1 {
+    text-align: center;
   }
 }

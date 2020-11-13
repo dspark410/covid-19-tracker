@@ -20,6 +20,7 @@ const casesTypeColors = {
 const showDataOnMap = (data, casesType = 'cases') =>
   data.map((country) => (
     <Circle
+      key={country.country}
       center={[country.countryInfo.lat, country.countryInfo.long]}
       fillOpacity={0.4}
       pathOptions={casesTypeColors[casesType].option}
@@ -49,8 +50,13 @@ const showDataOnMap = (data, casesType = 'cases') =>
   ))
 function Map({ center, zoom, countries, casesType }) {
   return (
-    <div className='map'>
-      <MapContainer center={center} zoom={zoom}>
+    <div className='map border-light'>
+      <MapContainer
+        center={center}
+        zoom={zoom}
+        maxBounds={(50, -50)}
+        maxBoundsViscosity={0.5}
+      >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
