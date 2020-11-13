@@ -43,7 +43,18 @@ body {
 }
 
 .chartjs-render-monitor {
-  height: 420px !important;
+  height: 450px !important;
+}
+
+.graph_container {
+  background-color: #f2f2f2 !important;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
 }
 
 @media (max-width: 1400px) {
