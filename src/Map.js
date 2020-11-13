@@ -48,15 +48,11 @@ const showDataOnMap = (data, casesType = 'cases') =>
       </Popup>
     </Circle>
   ))
+
 function Map({ center, zoom, countries, casesType }) {
   return (
     <div className='map border-light'>
-      <MapContainer
-        center={center}
-        zoom={zoom}
-        maxBounds={(50, -50)}
-        maxBoundsViscosity={0.5}
-      >
+      <MapContainer center={center} zoom={zoom}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

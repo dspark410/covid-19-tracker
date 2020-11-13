@@ -10,6 +10,7 @@ import LineGraph from './LineGraph'
 import { sort, capitalize } from './utils'
 
 function App() {
+  const [sortedCountries, setSortedCountries] = useState([])
   const [countries, setCountries] = useState([])
   const [worldInfo, setWorldInfo] = useState({})
   const [countryInfo, setCountryInfo] = useState({})
@@ -22,6 +23,9 @@ function App() {
     const getCountries = async () => {
       const response = await fetch('https://disease.sh/v3/covid-19/countries')
       const data = await response.json()
+
+      setSortedCountries(data)
+      console.log(data)
       const sortedData = sort(data)
       setCountries(sortedData)
     }
@@ -52,9 +56,11 @@ function App() {
     if (e.target.value === 'worldwide') {
       setCenter([32.80746, -40.4796])
       setZoom(3)
+      console.log('Worldwide: ', center, zoom)
     } else {
       setCenter([data.countryInfo.lat, data.countryInfo.long])
       setZoom(4)
+      console.log('Country: ', center, zoom)
     }
   }
 
@@ -69,7 +75,7 @@ function App() {
             onChange={handleOnChange}
           >
             <option value='worldwide'>Worldwide</option>
-            {countries.map((country) => (
+            {sortedCountries.map((country) => (
               <option key={country.country} value={country.countryInfo.iso3}>
                 {country.country}
               </option>
@@ -130,12 +136,14 @@ function App() {
 
       <div className='app_right'>
         <Card className='mb-3'>
-          <Card.Title className='p-3'>Live Cases By Country</Card.Title>
+          <Card.Title className='p-3 text-center'>
+            Live Cases By Country
+          </Card.Title>
           <TableData countries={countries} />
         </Card>
 
         <Card>
-          <Card.Title className='p-3'>
+          <Card.Title className='p-3 text-center'>
             Worldwide New {capitalize(casesType)}
           </Card.Title>
           <LineGraph casesType={casesType} className='p-3 border-light graph' />
