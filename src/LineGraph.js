@@ -44,6 +44,23 @@ const options = {
     ],
   },
 }
+
+const buildLineGraphCountryData = (data, casesType) => {
+  const lineGraphData = []
+  let dataPoint
+  for (let date in data.timeline.cases) {
+    if (dataPoint) {
+      const newDataPoint = {
+        x: date,
+        y: data.timeline[casesType][date] - dataPoint,
+      }
+      lineGraphData.push(newDataPoint)
+    }
+    dataPoint = data.timeline[casesType][date]
+  }
+  return lineGraphData
+}
+
 const buildLineGraphData = (data, casesType) => {
   const lineGraphData = []
   let dataPoint
@@ -60,31 +77,51 @@ const buildLineGraphData = (data, casesType) => {
   return lineGraphData
 }
 
-function LineGraph({ casesType, ...props }) {
-  const [data, setData] = useState({})
+function LineGraph({ casesType, countryCode, view, ...props }) {
+  const [worldData, setWorldData] = useState({})
+  const [countryData, setCountryData] = useState({})
 
   useEffect(() => {
-    const getData = async () => {
+    const getWorldData = async () => {
       const response = await fetch(
         'https://disease.sh/v3/covid-19/historical/all?lastdays=365'
       )
       const data = await response.json()
       const lineData = buildLineGraphData(data, casesType)
-      setData(lineData)
+      setWorldData(lineData)
     }
-    getData()
+    getWorldData()
   }, [casesType])
+
+  useEffect(() => {
+    const getCountryData = async () => {
+      const response = await fetch(
+        `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=all`
+      )
+      const data = await response.json()
+
+      if (data.message) {
+        setCountryData('')
+      } else {
+        const lineData = buildLineGraphCountryData(data, casesType)
+        setCountryData(lineData)
+      }
+    }
+    if (countryCode && view !== 'Worldwide') {
+      getCountryData()
+    }
+  }, [view, countryCode, casesType])
 
   return (
     <div className={props.className}>
       <div>
-        {data && data.length > 0 && (
+        {view === 'Worldwide' && worldData && worldData.length > 0 ? (
           <Line
             options={options}
             data={{
               datasets: [
                 {
-                  data: data,
+                  data: worldData,
                   backgroundColor: `${
                     casesType === 'cases'
                       ? 'rgb(227,149,161)'
@@ -103,6 +140,59 @@ function LineGraph({ casesType, ...props }) {
               ],
             }}
           />
+        ) : countryData === '' ? (
+          <Line
+            options={options}
+            data={{
+              datasets: [
+                {
+                  data: countryData,
+                  backgroundColor: `${
+                    casesType === 'cases'
+                      ? 'rgb(227,149,161)'
+                      : casesType === 'recovered'
+                      ? 'rgb(195,229,152)'
+                      : 'rgb(247,186,168)'
+                  }`,
+                  borderColor: `${
+                    casesType === 'cases'
+                      ? '#cc1034'
+                      : casesType === 'recovered'
+                      ? '#7dd71d'
+                      : '#ff6c47'
+                  }`,
+                },
+              ],
+            }}
+          />
+        ) : (
+          countryData &&
+          countryData.length > 0 && (
+            <Line
+              options={options}
+              data={{
+                datasets: [
+                  {
+                    data: countryData,
+                    backgroundColor: `${
+                      casesType === 'cases'
+                        ? 'rgb(227,149,161)'
+                        : casesType === 'recovered'
+                        ? 'rgb(195,229,152)'
+                        : 'rgb(247,186,168)'
+                    }`,
+                    borderColor: `${
+                      casesType === 'cases'
+                        ? '#cc1034'
+                        : casesType === 'recovered'
+                        ? '#7dd71d'
+                        : '#ff6c47'
+                    }`,
+                  },
+                ],
+              }}
+            />
+          )
         )}
       </div>
     </div>

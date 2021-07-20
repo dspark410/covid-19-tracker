@@ -20,7 +20,8 @@ function App() {
   const [casesType, setCasesType] = useState('cases')
   const [image, setImage] = useState()
   const [loading, setLoading] = useState(true)
-
+  const [view, setView] = useState('Worldwide')
+  const [countryCode, setCountryCode] = useState('')
   // Load country list on table
   useEffect(() => {
     const getCountries = async () => {
@@ -49,7 +50,7 @@ function App() {
   }, [])
 
   // Display info on cards with select menu
-  const handleOnChange = async (e) => {
+  const handleOnChange = async (e, map) => {
     const url =
       e.target.value === 'worldwide'
         ? 'https://disease.sh/v3/covid-19/all'
@@ -58,16 +59,23 @@ function App() {
     const response = await fetch(url)
     const data = await response.json()
 
+    if (e.target.value === 'worldwide') {
+      setView('Worldwide')
+    } else {
+      setView(data.country)
+      setCountryCode(e.target.value)
+    }
+
     setCountryInfo(data)
-    console.log(data)
 
     if (e.target.value === 'worldwide') {
-      setCenter([32.80746, -40.4796])
-      setZoom(3)
+      setCenter([34.80746, -40.4796])
+      setZoom(1)
       setImage(process.env.PUBLIC_URL + '/images/world.jpg')
     } else {
       setCenter([data.countryInfo.lat, data.countryInfo.long])
-      setZoom(4)
+
+      setZoom(8)
       setImage(data.countryInfo.flag)
     }
   }
@@ -84,14 +92,12 @@ function App() {
               <Form.Control
                 className='select-menu'
                 as='select'
-                onChange={handleOnChange}
-              >
+                onChange={handleOnChange}>
                 <option value='worldwide'>Worldwide</option>
                 {sortedCountries.map((country) => (
                   <option
                     key={country.country}
-                    value={country.countryInfo.iso3}
-                  >
+                    value={country.countryInfo.iso3}>
                     {country.country}
                   </option>
                 ))}
@@ -111,8 +117,9 @@ function App() {
                     ? countryInfo.todayCases
                     : worldInfo.todayCases
                 }
-                total={countryInfo.cases ? countryInfo.cases : worldInfo.cases}
-              ></InfoBox>
+                total={
+                  countryInfo.cases ? countryInfo.cases : worldInfo.cases
+                }></InfoBox>
               <InfoBox
                 image={image}
                 name={countryInfo.country ? countryInfo.country : ''}
@@ -130,8 +137,7 @@ function App() {
                   countryInfo.recovered
                     ? countryInfo.recovered
                     : worldInfo.recovered
-                }
-              ></InfoBox>
+                }></InfoBox>
               <InfoBox
                 image={image}
                 name={countryInfo.country ? countryInfo.country : ''}
@@ -147,8 +153,7 @@ function App() {
                 }
                 total={
                   countryInfo.deaths ? countryInfo.deaths : worldInfo.deaths
-                }
-              ></InfoBox>
+                }></InfoBox>
             </div>
 
             <Map
@@ -170,11 +175,14 @@ function App() {
 
             <Card className='graph_container'>
               <Card.Title className='p-3 text-center'>
-                Worldwide New {capitalize(casesType)}
+                {view} New {capitalize(casesType)}
               </Card.Title>
+
               <LineGraph
                 casesType={casesType}
                 className='p-3 border-light graph'
+                countryCode={countryCode}
+                view={view}
               />
             </Card>
           </div>
