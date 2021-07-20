@@ -56,6 +56,7 @@ function Map({ center, zoom, countries, casesType }) {
   function FlyToMap() {
     useEffect(() => {
       if (center && zoom && map) map.flyTo(center, zoom)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [center, zoom])
     return null
   }
