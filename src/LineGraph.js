@@ -53,7 +53,7 @@ function LineGraph({ casesType, countryCode, view, ...props }) {
   useEffect(() => {
     const controller = new AbortController()
     const signal = controller.signal
-    let abortData
+    // let abortData
 
     const getCountryData = async () => {
       const response = await fetch(
@@ -61,7 +61,7 @@ function LineGraph({ casesType, countryCode, view, ...props }) {
         { signal }
       )
       const data = await response.json()
-      abortData = data
+      // abortData = data
       if (
         data.message === "Country not found or doesn't have any historical data"
       ) {
