@@ -68,15 +68,13 @@ function App() {
 
     const response = await fetch(url)
     const data = await response.json()
-
+    setCountryInfo(data)
     if (e.target.value === 'worldwide') {
       setView('Worldwide')
     } else {
       setView(data.country)
       setCountryCode(e.target.value)
     }
-
-    setCountryInfo(data)
 
     setMapLoading(true)
 
@@ -120,58 +118,65 @@ function App() {
                 ))}
               </Form.Control>
             </Form.Group>
-
-            <div className='app_cardinfo'>
-              <InfoBox
-                image={image}
-                name={countryInfo.country ? countryInfo.country : ''}
-                red
-                active={casesType === 'cases'}
-                onClick={(e) => setCasesType('cases')}
-                title='Coronavirus Cases'
-                cases={
-                  countryInfo.todayCases
-                    ? countryInfo.todayCases
-                    : worldInfo.todayCases
-                }
-                total={
-                  countryInfo.cases ? countryInfo.cases : worldInfo.cases
-                }></InfoBox>
-              <InfoBox
-                image={image}
-                name={countryInfo.country ? countryInfo.country : ''}
-                countries={countries}
-                green
-                active={casesType === 'recovered'}
-                onClick={(e) => setCasesType('recovered')}
-                title='Recovered'
-                cases={
-                  countryInfo.todayRecovered
-                    ? countryInfo.todayRecovered
-                    : worldInfo.todayRecovered
-                }
-                total={
-                  countryInfo.recovered
-                    ? countryInfo.recovered
-                    : worldInfo.recovered
-                }></InfoBox>
-              <InfoBox
-                image={image}
-                name={countryInfo.country ? countryInfo.country : ''}
-                countries={countries}
-                orange
-                active={casesType === 'deaths'}
-                onClick={(e) => setCasesType('deaths')}
-                title='Deaths'
-                cases={
-                  countryInfo.todayDeaths
-                    ? countryInfo.todayDeaths
-                    : worldInfo.todayDeaths
-                }
-                total={
-                  countryInfo.deaths ? countryInfo.deaths : worldInfo.deaths
-                }></InfoBox>
-            </div>
+            {countryInfo && (
+              <div className='app_cardinfo'>
+                <InfoBox
+                  image={image}
+                  name={countryInfo.country ? countryInfo.country : ''}
+                  red
+                  active={casesType === 'cases'}
+                  onClick={() => setCasesType('cases')}
+                  title='Coronavirus Cases'
+                  cases={
+                    countryInfo.todayCases === 0
+                      ? '0'
+                      : countryInfo.todayCases
+                      ? countryInfo.todayCases
+                      : worldInfo.todayCases
+                  }
+                  total={
+                    countryInfo.cases ? countryInfo.cases : worldInfo.cases
+                  }></InfoBox>
+                <InfoBox
+                  image={image}
+                  name={countryInfo.country ? countryInfo.country : ''}
+                  countries={countries}
+                  green
+                  active={casesType === 'recovered'}
+                  onClick={() => setCasesType('recovered')}
+                  title='Recovered'
+                  cases={
+                    countryInfo.todayRecovered === 0
+                      ? '0'
+                      : countryInfo.todayRecovered
+                      ? countryInfo.todayRecovered
+                      : worldInfo.todayRecovered
+                  }
+                  total={
+                    countryInfo.recovered
+                      ? countryInfo.recovered
+                      : worldInfo.recovered
+                  }></InfoBox>
+                <InfoBox
+                  image={image}
+                  name={countryInfo.country ? countryInfo.country : ''}
+                  countries={countries}
+                  orange
+                  active={casesType === 'deaths'}
+                  onClick={() => setCasesType('deaths')}
+                  title='Deaths'
+                  cases={
+                    countryInfo.todayDeaths === 0
+                      ? '0'
+                      : countryInfo.todayDeaths
+                      ? countryInfo.todayDeaths
+                      : worldInfo.todayDeaths
+                  }
+                  total={
+                    countryInfo.deaths ? countryInfo.deaths : worldInfo.deaths
+                  }></InfoBox>
+              </div>
+            )}
 
             <Map
               countries={countries}

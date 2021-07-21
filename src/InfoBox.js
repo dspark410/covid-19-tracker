@@ -24,8 +24,7 @@ function InfoBox({
         ${active && green && 'border-green'}
         ${active && orange && 'border-orange'}
         `}
-      onClick={props.onClick}
-    >
+      onClick={props.onClick}>
       <Card.Title className={`infobox ${active && 'infobox-title'}`}>
         {title}
       </Card.Title>
@@ -43,10 +42,10 @@ function InfoBox({
         infobox infobox-text 
         ${active && red && 'red'} 
         ${active && green && 'green'} 
-        ${active && orange && 'orange'}`}
-      >
+        ${active && orange && 'orange'}`}>
         +{numeral(cases).format('0.0a')}
       </Card.Text>
+
       <Card.Text className={`infobox m-0 p-0 pb-2`}>
         {numeral(total).format('0.0a')} Total
       </Card.Text>

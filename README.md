@@ -4,6 +4,6 @@
 
 A Covid-19 tracker app that displays worldwide stats, and stats for each country.
 
-See a live demo [here](https://main.d3tcy20w66t5z5.amplifyapp.com/)
+See a live demo [here](https://covid-19-tracker-app1.netlify.app/)
 
 ![Screenshot](/public/images/home.jpg)

@@ -53,30 +53,32 @@ function LineGraph({ casesType, countryCode, view, ...props }) {
   useEffect(() => {
     const controller = new AbortController()
     const signal = controller.signal
-    // let abortData
 
-    const getCountryData = async () => {
-      const response = await fetch(
+    const getCountryData = () => {
+      fetch(
         `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=all`,
         { signal }
       )
-      const data = await response.json()
-      // abortData = data
-      if (
-        data.message === "Country not found or doesn't have any historical data"
-      ) {
-        setCountryData('')
-      } else {
-        const lineData = buildLineGraphCountryData(data, casesType)
-        setCountryData(lineData)
-      }
+        .then((res) => res.json())
+        .then((data) => {
+          if (
+            data.message ===
+            "Country not found or doesn't have any historical data"
+          ) {
+            setCountryData('')
+          } else {
+            const lineData = buildLineGraphCountryData(data, casesType)
+            setCountryData(lineData)
+          }
+        })
+        .catch((err) => console.log(err))
     }
+
     if (countryCode && view !== 'Worldwide') {
       getCountryData()
     }
 
     return () => {
-      // if (abortData === "Country not found or doesn't have any historical data")
       controller.abort()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
