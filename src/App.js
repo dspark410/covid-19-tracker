@@ -9,6 +9,7 @@ import TableData from './TableData'
 import LineGraph from './LineGraph'
 import { sort, capitalize } from './utils'
 import Loader from './Loader'
+import GraphLoader from './GraphLoader'
 
 function App() {
   const [sortedCountries, setSortedCountries] = useState([])
@@ -22,8 +23,11 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [view, setView] = useState('Worldwide')
   const [countryCode, setCountryCode] = useState('')
+  const [mapLoading, setMapLoading] = useState(true)
+
   // Load country list on table
   useEffect(() => {
+    let timer
     const getCountries = async () => {
       const response = await fetch('https://disease.sh/v3/covid-19/countries')
       const data = await response.json()
@@ -33,8 +37,14 @@ function App() {
       const sortedData = sort(data)
       setCountries(sortedData)
       setLoading(false)
+      timer = setTimeout(() => {
+        setMapLoading(false)
+      }, 2000)
     }
     getCountries()
+    return () => {
+      clearTimeout(timer)
+    }
   }, [])
 
   // Load Worldwide stats on cards
@@ -50,7 +60,7 @@ function App() {
   }, [])
 
   // Display info on cards with select menu
-  const handleOnChange = async (e, map) => {
+  const handleOnChange = async (e) => {
     const url =
       e.target.value === 'worldwide'
         ? 'https://disease.sh/v3/covid-19/all'
@@ -68,15 +78,22 @@ function App() {
 
     setCountryInfo(data)
 
+    setMapLoading(true)
+
     if (e.target.value === 'worldwide') {
       setCenter([34.80746, -40.4796])
-      setZoom(1)
+      setZoom(3)
       setImage(process.env.PUBLIC_URL + '/images/world.jpg')
+      setTimeout(() => {
+        setMapLoading(false)
+      }, 2000)
     } else {
       setCenter([data.countryInfo.lat, data.countryInfo.long])
-
       setZoom(8)
       setImage(data.countryInfo.flag)
+      setTimeout(() => {
+        setMapLoading(false)
+      }, 2000)
     }
   }
 
@@ -173,18 +190,23 @@ function App() {
               <TableData countries={countries} />
             </Card>
 
-            <Card className='graph_container'>
-              <Card.Title className='p-3 text-center'>
-                {view} New {capitalize(casesType)}
-              </Card.Title>
+            {mapLoading ? (
+              <GraphLoader />
+            ) : (
+              <Card className='graph_container'>
+                <Card.Title className='p-3 text-center'>
+                  {view} New {capitalize(casesType)}
+                </Card.Title>
 
-              <LineGraph
-                casesType={casesType}
-                className='p-3 border-light graph'
-                countryCode={countryCode}
-                view={view}
-              />
-            </Card>
+                <LineGraph
+                  casesType={casesType}
+                  className='p-3 border-light graph'
+                  countryCode={countryCode}
+                  view={view}
+                  mapLoading={mapLoading}
+                />
+              </Card>
+            )}
           </div>
         </div>
       )}

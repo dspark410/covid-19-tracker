@@ -3,6 +3,7 @@
   cursor: pointer;
   box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
   background-color: #f2f2f2;
+  width: 90%;
 }
 
 .infobox_container:not(:last-child) {
@@ -62,4 +63,31 @@
 
 .orange {
   color: #ff6c47;
+}
+
+@media (max-width: 760px) {
+}
+
+@media (max-width: 500px) {
+  .infobox_container:not(:last-child) {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 400px) {
+  .infobox_container:not(:last-child) {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 350px) {
+  .infobox_container:not(:last-child) {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 300px) {
+  .infobox_container:not(:last-child) {
+    margin-right: 0px;
+  }
 }
