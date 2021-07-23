@@ -18,6 +18,7 @@ function InfoBox({
 }) {
   return (
     <Card
+      style={{ width: '18rem' }}
       className={`
         infobox_container 
         ${active && red && 'border-red'}
@@ -28,9 +29,9 @@ function InfoBox({
       <Card.Title className={`infobox ${active && 'infobox-title'}`}>
         {title}
       </Card.Title>
-      <Card.Title className='imagebox infobox mb-2'>
+      <Card.Title className='imagebox infobox mb-3'>
         <div className='imagebox'>
-          <img className='image image-fluid' src={image} alt={image} />
+          <img className='fluid' src={image} alt={image} />
         </div>
       </Card.Title>
       <Card.Text className='m-0 text-center'>

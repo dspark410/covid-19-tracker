@@ -1,13 +1,1 @@
-.table {
-  height: 400px;
-  overflow: auto;
-  color: #6a5d4d;
-}
 
-.table td {
-  width: 100%;
-}
-
-.table tr:nth-of-type(odd) {
-  background-color: #f2f2f2;
-}

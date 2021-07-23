@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Card } from 'react-bootstrap'
 import { Line } from 'react-chartjs-2'
-import { options } from './utils'
 
-function LineGraph({ casesType, countryCode, view, ...props }) {
+import { options, capitalize } from './utils'
+
+function LineGraph({ casesType, countryCode, view, mapLoading, ...props }) {
   const [worldData, setWorldData] = useState({})
   const [countryData, setCountryData] = useState({})
 
@@ -85,89 +87,100 @@ function LineGraph({ casesType, countryCode, view, ...props }) {
   }, [countryCode, casesType])
 
   return (
-    <div className={props.className}>
+    <>
       <div>
-        {view === 'Worldwide' && worldData && worldData.length > 0 ? (
-          <Line
-            options={options}
-            data={{
-              datasets: [
-                {
-                  data: worldData,
-                  backgroundColor: `${
-                    casesType === 'cases'
-                      ? 'rgb(227,149,161)'
-                      : casesType === 'recovered'
-                      ? 'rgb(195,229,152)'
-                      : 'rgb(247,186,168)'
-                  }`,
-                  borderColor: `${
-                    casesType === 'cases'
-                      ? '#cc1034'
-                      : casesType === 'recovered'
-                      ? '#7dd71d'
-                      : '#ff6c47'
-                  }`,
-                },
-              ],
-            }}
-          />
-        ) : countryData === '' ? (
-          <Line
-            options={options}
-            data={{
-              datasets: [
-                {
-                  data: countryData,
-                  backgroundColor: `${
-                    casesType === 'cases'
-                      ? 'rgb(227,149,161)'
-                      : casesType === 'recovered'
-                      ? 'rgb(195,229,152)'
-                      : 'rgb(247,186,168)'
-                  }`,
-                  borderColor: `${
-                    casesType === 'cases'
-                      ? '#cc1034'
-                      : casesType === 'recovered'
-                      ? '#7dd71d'
-                      : '#ff6c47'
-                  }`,
-                },
-              ],
-            }}
-          />
-        ) : (
-          countryData &&
-          countryData.length > 0 && (
-            <Line
-              options={options}
-              data={{
-                datasets: [
-                  {
-                    data: countryData,
-                    backgroundColor: `${
-                      casesType === 'cases'
-                        ? 'rgb(227,149,161)'
-                        : casesType === 'recovered'
-                        ? 'rgb(195,229,152)'
-                        : 'rgb(247,186,168)'
-                    }`,
-                    borderColor: `${
-                      casesType === 'cases'
-                        ? '#cc1034'
-                        : casesType === 'recovered'
-                        ? '#7dd71d'
-                        : '#ff6c47'
-                    }`,
-                  },
-                ],
-              }}
-            />
-          )
-        )}
+        <Card className='w-100 mx-auto'>
+          <Card.Title
+            style={{ backgroundColor: '#dee0ec' }}
+            className='p-3 text-center mb-0 '>
+            {view} New {capitalize(casesType)}
+          </Card.Title>
+        </Card>
+        <div style={{ backgroundColor: '#dee0ec' }} className={props.className}>
+          <div>
+            {view === 'Worldwide' && worldData && worldData.length > 0 ? (
+              <Line
+                options={options}
+                data={{
+                  datasets: [
+                    {
+                      data: worldData,
+                      backgroundColor: `${
+                        casesType === 'cases'
+                          ? 'rgb(227,149,161)'
+                          : casesType === 'recovered'
+                          ? 'rgb(195,229,152)'
+                          : 'rgb(247,186,168)'
+                      }`,
+                      borderColor: `${
+                        casesType === 'cases'
+                          ? '#cc1034'
+                          : casesType === 'recovered'
+                          ? '#7dd71d'
+                          : '#ff6c47'
+                      }`,
+                    },
+                  ],
+                }}
+              />
+            ) : countryData === '' ? (
+              <Line
+                options={options}
+                data={{
+                  datasets: [
+                    {
+                      data: countryData,
+                      backgroundColor: `${
+                        casesType === 'cases'
+                          ? 'rgb(227,149,161)'
+                          : casesType === 'recovered'
+                          ? 'rgb(195,229,152)'
+                          : 'rgb(247,186,168)'
+                      }`,
+                      borderColor: `${
+                        casesType === 'cases'
+                          ? '#cc1034'
+                          : casesType === 'recovered'
+                          ? '#7dd71d'
+                          : '#ff6c47'
+                      }`,
+                    },
+                  ],
+                }}
+              />
+            ) : (
+              countryData &&
+              countryData.length > 0 && (
+                <Line
+                  options={options}
+                  data={{
+                    datasets: [
+                      {
+                        data: countryData,
+                        backgroundColor: `${
+                          casesType === 'cases'
+                            ? 'rgb(227,149,161)'
+                            : casesType === 'recovered'
+                            ? 'rgb(195,229,152)'
+                            : 'rgb(247,186,168)'
+                        }`,
+                        borderColor: `${
+                          casesType === 'cases'
+                            ? '#cc1034'
+                            : casesType === 'recovered'
+                            ? '#7dd71d'
+                            : '#ff6c47'
+                        }`,
+                      },
+                    ],
+                  }}
+                />
+              )
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

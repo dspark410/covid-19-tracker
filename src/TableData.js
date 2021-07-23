@@ -1,22 +1,22 @@
 import React from 'react'
-import './TableData.css'
 import numeral from 'numeral'
+import { Table } from 'react-bootstrap'
 
 function TableData({ countries }) {
   return (
-    <div className='table border-light'>
-      <table>
+    <div style={{ height: '418px', overflow: 'auto' }}>
+      <Table striped bordered hover>
         <tbody>
           {countries.map((country) => (
             <tr key={country.country}>
-              <td>{country.country}</td>
+              <td className='text-center'>{country.country}</td>
               <td>
                 <strong>{numeral(country.cases).format('0,0')}</strong>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }

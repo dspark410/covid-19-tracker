@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'leaflet/dist/leaflet.css'
-import { Form, Card } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import InfoBox from './InfoBox'
 import Map from './Map'
 import TableData from './TableData'
 import LineGraph from './LineGraph'
-import { sort, capitalize } from './utils'
+import { sort } from './utils'
 import Loader from './Loader'
 import GraphLoader from './GraphLoader'
+import CovidCarousel from './CovidCarousel'
+import MiddleCarousel from './MiddleCarousel'
+import CardBox from './CardBox'
 
 function App() {
   const [sortedCountries, setSortedCountries] = useState([])
@@ -39,7 +42,7 @@ function App() {
       setLoading(false)
       timer = setTimeout(() => {
         setMapLoading(false)
-      }, 2000)
+      }, 3000)
     }
     getCountries()
     return () => {
@@ -84,14 +87,14 @@ function App() {
       setImage(process.env.PUBLIC_URL + '/images/world.jpg')
       setTimeout(() => {
         setMapLoading(false)
-      }, 2000)
+      }, 3000)
     } else {
       setCenter([data.countryInfo.lat, data.countryInfo.long])
       setZoom(8)
       setImage(data.countryInfo.flag)
       setTimeout(() => {
         setMapLoading(false)
-      }, 2000)
+      }, 3000)
     }
   }
 
@@ -100,10 +103,16 @@ function App() {
       {loading ? (
         <Loader />
       ) : (
-        <div className='app'>
-          <div className='app_left'>
-            <Form.Group className='app_selectmenu'>
-              <h1>COVID-19 TRACKER</h1>
+        <>
+          <CovidCarousel />
+
+          <Container className='mt-5'>
+            <h1
+              style={{ fontWeight: '600', color: '#7e89d4' }}
+              className='text-center mb-4'>
+              Tracking COVID-19 Across The World
+            </h1>
+            <Form.Group className='w-50 mx-auto mt-4 mb-4'>
               <Form.Control
                 className='select-menu'
                 as='select'
@@ -118,15 +127,124 @@ function App() {
                 ))}
               </Form.Control>
             </Form.Group>
-            {countryInfo && (
-              <div className='app_cardinfo'>
-                <InfoBox
-                  image={image}
-                  name={countryInfo.country ? countryInfo.country : ''}
+
+            <Row>
+              {countryInfo && (
+                <>
+                  <Col>
+                    <InfoBox
+                      image={image}
+                      name={countryInfo.country ? countryInfo.country : ''}
+                      red
+                      active={casesType === 'cases'}
+                      onClick={() => setCasesType('cases')}
+                      title='Coronavirus Cases'
+                      cases={
+                        countryInfo.todayCases === 0
+                          ? '0'
+                          : countryInfo.todayCases
+                          ? countryInfo.todayCases
+                          : worldInfo.todayCases
+                      }
+                      total={
+                        countryInfo.cases ? countryInfo.cases : worldInfo.cases
+                      }
+                    />
+                  </Col>
+                  <Col>
+                    <InfoBox
+                      image={image}
+                      name={countryInfo.country ? countryInfo.country : ''}
+                      countries={countries}
+                      green
+                      active={casesType === 'recovered'}
+                      onClick={() => setCasesType('recovered')}
+                      title='Recovered'
+                      cases={
+                        countryInfo.todayRecovered === 0
+                          ? '0'
+                          : countryInfo.todayRecovered
+                          ? countryInfo.todayRecovered
+                          : worldInfo.todayRecovered
+                      }
+                      total={
+                        countryInfo.recovered
+                          ? countryInfo.recovered
+                          : worldInfo.recovered
+                      }
+                    />
+                  </Col>
+                  <Col>
+                    <InfoBox
+                      image={image}
+                      name={countryInfo.country ? countryInfo.country : ''}
+                      countries={countries}
+                      orange
+                      active={casesType === 'deaths'}
+                      onClick={() => setCasesType('deaths')}
+                      title='Deaths'
+                      cases={
+                        countryInfo.todayDeaths === 0
+                          ? '0'
+                          : countryInfo.todayDeaths
+                          ? countryInfo.todayDeaths
+                          : worldInfo.todayDeaths
+                      }
+                      total={
+                        countryInfo.deaths
+                          ? countryInfo.deaths
+                          : worldInfo.deaths
+                      }
+                    />
+                  </Col>
+                </>
+              )}
+            </Row>
+            <h1
+              style={{ fontWeight: '600', color: '#7e89d4' }}
+              className='text-center mb-4 mt-5'>
+              Click On A Card And Visualize Data Below
+            </h1>
+          </Container>
+
+          <MiddleCarousel />
+
+          <Container className='mt-5'>
+            <h3 style={{ fontWeight: '600' }} className='text-center mb-4'>
+              {view} Graph Data
+            </h3>
+            <Row>
+              <Col md={9}>
+                <LineGraph
+                  view={view}
+                  casesType={casesType}
+                  className='p-3 border-light'
+                  countryCode={countryCode}
+                  mapLoading={mapLoading}
+                />
+              </Col>
+              <Col md={3}>
+                <h5 className='text-center'>Select A Country</h5>
+                <Form.Group className='w-100 mx-auto'>
+                  <Form.Control
+                    className='select-menu'
+                    as='select'
+                    onChange={handleOnChange}>
+                    <option value='worldwide'>Worldwide</option>
+                    {sortedCountries.map((country) => (
+                      <option
+                        key={country.country}
+                        value={country.countryInfo.iso3}>
+                        {country.country}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                <CardBox
                   red
                   active={casesType === 'cases'}
                   onClick={() => setCasesType('cases')}
-                  title='Coronavirus Cases'
+                  title='Cases'
                   cases={
                     countryInfo.todayCases === 0
                       ? '0'
@@ -136,11 +254,9 @@ function App() {
                   }
                   total={
                     countryInfo.cases ? countryInfo.cases : worldInfo.cases
-                  }></InfoBox>
-                <InfoBox
-                  image={image}
-                  name={countryInfo.country ? countryInfo.country : ''}
-                  countries={countries}
+                  }
+                />
+                <CardBox
                   green
                   active={casesType === 'recovered'}
                   onClick={() => setCasesType('recovered')}
@@ -156,11 +272,10 @@ function App() {
                     countryInfo.recovered
                       ? countryInfo.recovered
                       : worldInfo.recovered
-                  }></InfoBox>
-                <InfoBox
-                  image={image}
-                  name={countryInfo.country ? countryInfo.country : ''}
-                  countries={countries}
+                  }
+                />
+                <CardBox
+                  className='w-100'
                   orange
                   active={casesType === 'deaths'}
                   onClick={() => setCasesType('deaths')}
@@ -174,10 +289,15 @@ function App() {
                   }
                   total={
                     countryInfo.deaths ? countryInfo.deaths : worldInfo.deaths
-                  }></InfoBox>
-              </div>
-            )}
-
+                  }
+                />
+              </Col>
+            </Row>
+          </Container>
+          <Container className='mb-5'>
+            <h3 style={{ fontWeight: '600' }} className='text-center mb-4 mt-5'>
+              COVID-19 Map Data
+            </h3>
             <Map
               countries={countries}
               worldInfo={worldInfo}
@@ -185,35 +305,23 @@ function App() {
               zoom={zoom}
               casesType={casesType}
             />
-          </div>
+          </Container>
 
-          <div className='app_right'>
-            <Card className='mb-3'>
-              <Card.Title className='p-3 text-center'>
-                Live Cases By Country
-              </Card.Title>
-              <TableData countries={countries} />
-            </Card>
-
-            {mapLoading ? (
-              <GraphLoader />
-            ) : (
-              <Card className='graph_container'>
-                <Card.Title className='p-3 text-center'>
-                  {view} New {capitalize(casesType)}
-                </Card.Title>
-
-                <LineGraph
-                  casesType={casesType}
-                  className='p-3 border-light graph'
-                  countryCode={countryCode}
-                  view={view}
-                  mapLoading={mapLoading}
-                />
-              </Card>
-            )}
-          </div>
-        </div>
+          {/* <Container fluid className='mt-5 country-graph-container'>
+            <Row>
+              <Col className='mx-auto'>
+                <Card
+                  style={{ width: '25em', backgroundColor: '#dee0ec' }}
+                  className='mb-3 mx-auto'>
+                  <Card.Title className='p-3 text-center'>
+                    Live Cases By Country
+                  </Card.Title>
+                  <TableData countries={countries} />
+                </Card>
+              </Col>
+            </Row>
+          </Container> */}
+        </>
       )}
     </>
   )

@@ -1,29 +1,14 @@
 .infobox_container {
-  flex: 1;
   cursor: pointer;
   box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
-  background-color: #f2f2f2;
-  width: 90%;
-}
-
-.infobox_container:not(:last-child) {
-  margin-right: 10px;
+  background-color: #dee0ec;
+  width: 100%;
+  margin: 10px auto;
 }
 
 .infobox {
   text-align: center;
-  align-items: center;
-  justify-content: center;
   padding: 10px 0;
-}
-
-.infobox-title {
-  font-size: 20px;
-}
-
-.infobox-text {
-  font-weight: bold;
-  font-size: 28px;
 }
 
 .imagebox {
@@ -43,51 +28,28 @@
 }
 
 .border-red {
-  border: 1px #cc1034 solid;
+  -webkit-box-shadow: 0 0 10px #c7949d;
+  box-shadow: 0 0 10px #c7949d;
 }
 
 .border-green {
-  border: 1px #7dd71d solid;
+  -webkit-box-shadow: 0 0 10px #adce8b;
+  box-shadow: 0 0 10px #adce8b;
 }
 
 .border-orange {
-  border: 1px #ff6c47 solid;
+  -webkit-box-shadow: 0 0 10px #e5aea0;
+  box-shadow: 0 0 10px #e5aea0;
 }
+
 .red {
-  color: #cc1034;
+  color: #c78490;
 }
 
 .green {
-  color: #7dd71d;
+  color: #83b353;
 }
 
 .orange {
-  color: #ff6c47;
-}
-
-@media (max-width: 760px) {
-}
-
-@media (max-width: 500px) {
-  .infobox_container:not(:last-child) {
-    margin-right: 0px;
-  }
-}
-
-@media (max-width: 400px) {
-  .infobox_container:not(:last-child) {
-    margin-right: 0px;
-  }
-}
-
-@media (max-width: 350px) {
-  .infobox_container:not(:last-child) {
-    margin-right: 0px;
-  }
-}
-
-@media (max-width: 300px) {
-  .infobox_container:not(:last-child) {
-    margin-right: 0px;
-  }
+  color: #cf7964;
 }

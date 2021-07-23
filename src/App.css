@@ -1,204 +1,44 @@
-* {
-  margin: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f6fa !important;
+  font-family: 'Poppins', sans-serif !important;
+  background-color: #f2f5fc !important;
 }
 
-.app {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 20px;
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
+  background: #d9dbe8;
+  width: 8px;
+  height: 8px;
 }
 
-.app_left {
-  flex: 0.9;
+.light-scrollbar::-webkit-scrollbar,
+.light-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.select-menu {
-  outline: none !important;
-  box-shadow: none !important;
-  border: solid 1px #ccc !important;
-  box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5) !important;
-  width: 20% !important;
+::-webkit-scrollbar-thumb {
+  background-color: #b6bad4;
+  border-radius: 3px;
 }
 
-.app_selectmenu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-control-prev,
+.carousel-control-next {
+  display: none !important;
+  pointer-events: none !important;
 }
 
-.app_cardinfo {
-  display: flex;
-  justify-content: space-between;
-  overflow: auto;
-}
-
-.app_right {
-  border-radius: 8px !important;
+.carousel-indicators {
+  display: none !important;
+  pointer-events: none !important;
 }
 
 .chartjs-render-monitor {
-  width: 450px !important;
-  height: 450px !important;
+  min-height: 350px !important;
 }
 
-.graph_container {
-  background-color: #f2f2f2 !important;
-}
-
-.spinner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-}
-
-@media (max-width: 1400px) {
-  .app {
-    flex-direction: column;
-  }
-  .select-menu {
-    flex-direction: column !important;
-  }
-  .app_right {
-    margin-top: 20px;
-  }
-  .chartjs-render-monitor {
-    width: auto !important;
-    height: auto !important;
-  }
-}
-
-@media (max-width: 760px) {
-  .app_cardinfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .select-menu {
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 500px) {
-  .app_cardinfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .app_selectmenu {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .infobox_container {
-    margin-bottom: 10px;
-    width: 350px;
-    height: 200px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .app_selectmenu h1 {
-    text-align: center;
-  }
-
-  .chartjs-render-monitor {
-    width: 400px !important;
-    height: 400px !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .app_cardinfo {
-    display: flex;
-    flex-direction: column;
-  }
-  .app_selectmenu {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .infobox_container {
-    margin-bottom: 10px;
-    width: 300px;
-    height: 200px;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-  }
-
-  .app_selectmenu h1 {
-    text-align: center;
-  }
-
-  .chartjs-render-monitor {
-    width: 350px !important;
-    height: 350px !important;
-  }
-}
-
-@media (max-width: 350px) {
-  .app_cardinfo {
-    display: flex;
-    flex-direction: column;
-  }
-  .app_selectmenu {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .infobox_container {
-    margin-bottom: 10px;
-    width: 250px;
-    height: 150px;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-  }
-
-  .app_selectmenu h1 {
-    text-align: center;
-  }
-
-  .chartjs-render-monitor {
-    width: 300px !important;
-    height: 300px !important;
-  }
-}
-
-@media (max-width: 300px) {
-  .app_cardinfo {
-    display: flex;
-    flex-direction: column;
-  }
-  .app_selectmenu {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .infobox_container {
-    margin-bottom: 10px;
-    width: 220px;
-    height: 150px;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-  }
-
-  .app_selectmenu h1 {
-    text-align: center;
-  }
-
-  .chartjs-render-monitor {
-    width: 250px !important;
-    height: 250px !important;
-  }
+.card {
+  width: 100%;
 }
