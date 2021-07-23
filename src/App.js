@@ -109,7 +109,7 @@ function App() {
           <Container className='mt-5'>
             <h1
               style={{ fontWeight: '600', color: '#7e89d4' }}
-              className='text-center mb-4'>
+              className='text-center mb-4 tracking'>
               Tracking COVID-19 Across The World
             </h1>
             <Form.Group className='w-50 mx-auto mt-4 mb-4'>
@@ -202,7 +202,7 @@ function App() {
             </Row>
             <h1
               style={{ fontWeight: '600', color: '#7e89d4' }}
-              className='text-center mb-4 mt-5'>
+              className='text-center mb-4 mt-5 click'>
               Click On A Card And Visualize Data Below
             </h1>
           </Container>
@@ -210,7 +210,9 @@ function App() {
           <MiddleCarousel />
 
           <Container className='mt-5'>
-            <h3 style={{ fontWeight: '600' }} className='text-center mb-4'>
+            <h3
+              style={{ fontWeight: '600' }}
+              className='text-center mb-4 graph-header'>
               {view} Graph Data
             </h3>
             <Row>
@@ -224,7 +226,7 @@ function App() {
                 />
               </Col>
               <Col md={3}>
-                <h5 className='text-center'>Select A Country</h5>
+                <h5 className='text-center select-country'>Select A Country</h5>
                 <Form.Group className='w-100 mx-auto'>
                   <Form.Control
                     className='select-menu'
@@ -295,7 +297,9 @@ function App() {
             </Row>
           </Container>
           <Container className='mb-5'>
-            <h3 style={{ fontWeight: '600' }} className='text-center mb-4 mt-5'>
+            <h3
+              style={{ fontWeight: '600' }}
+              className='text-center mb-4 mt-5 map-header'>
               COVID-19 Map Data
             </h3>
             <Map

@@ -42,3 +42,261 @@ body {
 .card {
   width: 100%;
 }
+
+@media (max-width: 1224px) {
+  .display-1 {
+    font-size: 4rem !important;
+  }
+  .display-2 {
+    font-size: 3rem !important;
+  }
+
+  .statistic {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .display-1 {
+    font-size: 4rem !important;
+  }
+  .display-2 {
+    font-size: 3rem !important;
+  }
+
+  .statistic {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 866px) {
+  .display-1 {
+    font-size: 3rem !important;
+  }
+  .display-2 {
+    font-size: 3rem !important;
+  }
+
+  .statistic {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .display-1 {
+    font-size: 3.5rem !important;
+  }
+  .tracking {
+    font-size: 3.5rem !important;
+  }
+
+  .display-2 {
+    font-size: 2.75rem !important;
+  }
+
+  .statistic {
+    font-size: 1.25rem !important;
+  }
+
+  .click {
+    font-size: 2rem !important;
+  }
+
+  .tracking {
+    font-size: 2rem !important;
+  }
+  .map-header {
+    font-size: 1.5rem !important;
+  }
+
+  .graph-header {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 610px) {
+  .display-1 {
+    font-size: 3rem !important;
+  }
+  .display-2 {
+    font-size: 2rem !important;
+  }
+
+  .statistic {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .display-1 {
+    font-size: 3rem !important;
+  }
+  .display-2 {
+    font-size: 2rem !important;
+  }
+
+  .statistic {
+    font-size: 1rem !important;
+  }
+
+  .click {
+    font-size: 2rem !important;
+  }
+
+  .select-country {
+    font-size: 1.25rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .tracking {
+    font-size: 2rem !important;
+  }
+  .map-header {
+    font-size: 1.5rem !important;
+  }
+
+  .graph-header {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .display-1 {
+    font-size: 3rem !important;
+  }
+  .display-2 {
+    font-size: 3rem !important;
+  }
+  .statistic {
+    font-size: 3rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .display-1 {
+    font-size: 2rem !important;
+  }
+  .display-2 {
+    font-size: 3rem !important;
+  }
+  .statistic {
+    font-size: 0.75rem !important;
+  }
+  .click {
+    font-size: 1.5rem !important;
+  }
+
+  .select-country {
+    margin-top: 1rem !important;
+  }
+
+  .tracking {
+    font-size: 1.5rem !important;
+  }
+  .map-header {
+    font-size: 1.25rem !important;
+  }
+
+  .graph-header {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .display-1 {
+    font-size: 2rem !important;
+  }
+  .display-2 {
+    font-size: 2rem !important;
+  }
+
+  .select-country {
+    font-size: 1rem !important;
+  }
+  .click {
+    font-size: 1.5rem !important;
+  }
+
+  .tracking {
+    font-size: 1.5rem !important;
+  }
+
+  .select-country {
+    font-size: 1.15rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .map-header {
+    font-size: 1.25rem !important;
+  }
+
+  .graph-header {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 330px) {
+  .display-1 {
+    font-size: 1.5rem !important;
+  }
+  .display-2 {
+    font-size: 2rem !important;
+  }
+  .statistic {
+    font-size: 0.75rem !important;
+  }
+  .click {
+    font-size: 1rem !important;
+  }
+
+  .tracking {
+    font-size: 1rem !important;
+  }
+  .map-header {
+    font-size: 1rem !important;
+  }
+
+  .select-country {
+    font-size: 1rem !important;
+    margin-top: 1rem !important;
+  }
+  .graph-header {
+    font-size: 1rem !important;
+  }
+  .line-header {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 285px) {
+  .display-1 {
+    font-size: 2rem !important;
+  }
+
+  .click {
+    font-size: 1.25rem !important;
+  }
+
+  .display-2 {
+    font-size: 1.75rem !important;
+  }
+
+  .click {
+    font-size: 1.25rem !important;
+  }
+
+  .statistic {
+    font-size: 0.65rem !important;
+  }
+
+  .map-header {
+    font-size: 1.25rem !important;
+  }
+
+  .graph-header {
+    font-size: 1.25rem !important;
+  }
+  .infobox_container {
+    width: 16rem !important;
+  }
+}

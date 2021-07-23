@@ -92,7 +92,7 @@ function LineGraph({ casesType, countryCode, view, mapLoading, ...props }) {
         <Card className='w-100 mx-auto'>
           <Card.Title
             style={{ backgroundColor: '#dee0ec' }}
-            className='p-3 text-center mb-0 '>
+            className='p-3 text-center mb-0 line-header'>
             {view} New {capitalize(casesType)}
           </Card.Title>
         </Card>
