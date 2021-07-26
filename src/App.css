@@ -43,6 +43,9 @@ body {
   width: 100%;
 }
 
+.total-card-container {
+}
+
 @media (max-width: 1224px) {
   .display-1 {
     font-size: 4rem !important;
