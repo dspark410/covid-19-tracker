@@ -55,32 +55,37 @@ function CovidGraph({ casesType, countryCode, view, ...props }) {
   }, [casesType])
 
   useEffect(() => {
-    setCountryData('')
     const controller = new AbortController()
     const signal = controller.signal
-    if (countryCode === '' && view === 'Worldwide') {
+    if (countryCode === 'worldwide' && view === 'Worldwide') {
       return
     } else {
       const getCountryData = () => {
-        fetch(
-          `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=all`,
-          { signal }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            if (
-              data.message ===
-              "Country not found or doesn't have any historical data"
-            ) {
-              setCountryData('')
-            } else {
-              const countryLineData = buildLineGraphCountryData(data, casesType)
-              setCountryData(countryLineData)
-            }
-          })
-          .catch((err) => {
-            console.log('err', err.message)
-          })
+        if (countryCode === 'worldwide') return
+        else {
+          fetch(
+            `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=all`,
+            { signal }
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              if (
+                data.message ===
+                "Country not found or doesn't have any historical data"
+              ) {
+                setCountryData('')
+              } else {
+                const countryLineData = buildLineGraphCountryData(
+                  data,
+                  casesType
+                )
+                setCountryData(countryLineData)
+              }
+            })
+            .catch((err) => {
+              console.log('err', err.message)
+            })
+        }
       }
       getCountryData()
     }
@@ -102,9 +107,9 @@ function CovidGraph({ casesType, countryCode, view, ...props }) {
               ? `${view} New ${capitalize(casesType)}`
               : countryData.length > 0 && view !== 'Worldwide'
               ? `${view} New ${capitalize(casesType)}`
-              : countryData === '' &&
-                view !== 'Worldwide' &&
-                'No Historical Data'}
+              : countryData === '' && view !== 'Worldwide'
+              ? 'No Historical Data'
+              : null}
           </Card.Title>
         </Card>
         <div style={{ backgroundColor: '#dee0ec' }} className={props.className}>

@@ -43,7 +43,55 @@ body {
   width: 100%;
 }
 
-.total-card-container {
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5em;
+  background-color: #d9dbe8;
+}
+
+.footer-image1 {
+  width: 6em;
+  height: auto;
+}
+
+.footer-image2 {
+  width: 6em;
+  height: auto;
+}
+
+.footer-image1 {
+  margin-left: 2rem;
+}
+
+.footer-image2-container {
+  margin-right: 3em;
+}
+
+.footer-image2-container:hover {
+  cursor: pointer;
+}
+
+.footer-text {
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.footer-a {
+  text-decoration: none;
+  color: black;
+}
+
+.footer-a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.footer2-span {
+  font-weight: 700;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 1224px) {
@@ -114,6 +162,21 @@ body {
 
   .graph-header {
     font-size: 1.5rem !important;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5em;
+    background-color: #d9dbe8;
+  }
+  .footer-image1 {
+    margin: 0 auto;
+  }
+  .footer-image2-container {
+    margin: auto 0;
   }
 }
 
@@ -203,6 +266,30 @@ body {
   .graph-header {
     font-size: 1.25rem !important;
   }
+  .footer-container {
+    margin-top: 0.5rem;
+  }
+
+  .footer-text {
+    font-size: 0.6rem;
+    width: 75%;
+    margin-bottom: 0.2rem;
+  }
+
+  .footer-image1 {
+    width: 4em;
+  }
+
+  .footer-image2-container {
+    margin: 0 auto;
+  }
+
+  .footer-image2 {
+    width: 4em;
+  }
+  .footer2-span {
+    font-size: 0.6rem;
+  }
 }
 
 @media (max-width: 375px) {
@@ -235,6 +322,31 @@ body {
 
   .graph-header {
     font-size: 1.25rem !important;
+  }
+
+  .footer-container {
+    margin-top: 0.5rem;
+  }
+
+  .footer-text {
+    font-size: 0.6rem;
+    width: 75%;
+    margin-bottom: 0.2rem;
+  }
+
+  .footer-image1 {
+    width: 4em;
+  }
+
+  .footer-image2-container {
+    margin: 0 auto;
+  }
+
+  .footer-image2 {
+    width: 4em;
+  }
+  .footer2-span {
+    font-size: 0.6rem;
   }
 }
 
@@ -301,5 +413,29 @@ body {
   }
   .infobox_container {
     width: 16rem !important;
+  }
+  .footer-container {
+    margin-top: 0.5rem;
+  }
+
+  .footer-text {
+    font-size: 0.6rem;
+    width: 75%;
+    margin-bottom: 0.2rem;
+  }
+
+  .footer-image1 {
+    width: 4em;
+  }
+
+  .footer-image2-container {
+    margin: 0 auto;
+  }
+
+  .footer-image2 {
+    width: 4em;
+  }
+  .footer2-span {
+    font-size: 0.6rem;
   }
 }

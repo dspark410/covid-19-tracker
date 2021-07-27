@@ -54,6 +54,7 @@ function VaccineVisuals({
             className='text-center mb-4 graph-header mx-auto'>
             {view} Vaccination Graph Data
           </h3>
+
           <Col md={9}>
             <VaccineGraph
               worldLineData={worldLineData}

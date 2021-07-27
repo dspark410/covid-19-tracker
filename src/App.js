@@ -8,6 +8,7 @@ import LastCarousel from './LastCarousel'
 import CovidCards from './CovidCards'
 import CovidVisuals from './CovidVisuals'
 import VaccineVisuals from './VaccineVisuals'
+import Footer from './Footer'
 
 function App() {
   const [sortedCountries, setSortedCountries] = useState([])
@@ -118,7 +119,6 @@ function App() {
 
   useEffect(() => {
     //All Country Vaccine Data
-
     fetch(
       `https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=all&fullData=false`
     )
@@ -237,6 +237,8 @@ function App() {
             countryVaccineCount={countryVaccineCount}
             vaccineCount={vaccineCount}
           />
+
+          <Footer />
         </>
       )}
     </>
