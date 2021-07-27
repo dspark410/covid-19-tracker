@@ -15,8 +15,15 @@ function Footer() {
         />
       </a>
       <div className='footer-text'>
-        COVID-19 dataa sourced from disease.sh, an open API for disease-related
-        statistics
+        COVID-19 data sourced from,&nbsp;
+        <a
+          className='footer-a'
+          href='https://disease.sh/docs/'
+          rel='noreferrer'
+          target='_blank'>
+          disease.sh
+        </a>
+        &nbsp;an open API for disease-related statistics
       </div>
 
       <div className='footer-image2-container'>

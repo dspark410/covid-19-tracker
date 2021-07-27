@@ -23,7 +23,7 @@ function CovidVisuals({
         <h3
           style={{ fontWeight: '600' }}
           className='text-center mb-4 graph-header'>
-          {view} Graph Data
+          {view} COVID-19 Graph Data
         </h3>
         <Row>
           <Col md={9}>
