@@ -29,9 +29,9 @@ function InfoBox({
       <Card.Title className={`infobox ${active && 'infobox-title'}`}>
         {title}
       </Card.Title>
-      <Card.Title className='imagebox infobox mb-3'>
+      <Card.Title className='imagebox infobox'>
         <div className='imagebox'>
-          <img className='fluid' src={image} alt={image} />
+          <img className='imageFlag' src={image} alt={image} />
         </div>
       </Card.Title>
       <Card.Text className='m-0 text-center'>
